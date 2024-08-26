@@ -1,0 +1,31 @@
+#version: '2'
+services:
+  lobby:
+    build:
+      context: .
+      dockerfile: docker/lobby/Dockerfile
+      args:
+        VITE_SERVER_URL: "http://localhost:8000"
+    ports:
+      - "3000:80"
+  server:
+    build:
+      context: .
+      dockerfile: docker/server/Dockerfile
+      args:
+        ORIGIN_URL: "localhost:3000"
+    ports:
+      - "8000:8000"
+  shogi:
+    build:
+      context: .
+      dockerfile: docker/shogi/Dockerfile
+    ports:
+      - "3001:80"
+  co_shogi:
+    build:
+      context: .
+      dockerfile: docker/co_shogi/Dockerfile
+    ports:
+      - "3002:80"
+    tty: true

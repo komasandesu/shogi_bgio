@@ -1,0 +1,8 @@
+{
+  "files": [],
+  "references": [
+    { "path": "games/shogi" },
+    { "path": "games/co_shogi" },
+    { "path": "lobby" },
+  ]
+}
