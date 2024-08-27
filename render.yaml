@@ -12,8 +12,6 @@ services:
     envVars:
       - key: PORT
         value: 80
-      - key: VITE_SERVER_URL
-        value: "http://shogi_bgio.onrender.com:8000"
 
     - type: web
       name: server
@@ -26,8 +24,6 @@ services:
       envVars:
         - key: PORT
           value: 8000
-        - key: VITE_SERVER_URL
-          value: "http://shogi_bgio.onrender.com:80"
 
   - type: web
     name: shogi
