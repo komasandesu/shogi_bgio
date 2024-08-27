@@ -1,24 +1,42 @@
+version: "1"
+
 services:
   - type: web
     name: lobby
     env: docker
+    runtime: docker
+    dockerContext: .
     dockerfilePath: ./docker/lobby/Dockerfile
+    plan: free
+    region: singapore
     envVars:
       - key: PORT
         value: 80
+      - key: VITE_SERVER_URL
+        value: "http://shogi_bgio.onrender.com:8000"
 
     - type: web
       name: server
       env: docker
+      runtime: docker
+      dockerContext: .
       dockerfilePath: ./docker/server/Dockerfile
+      plan: free
+      region: singapore
       envVars:
         - key: PORT
           value: 8000
+        - key: VITE_SERVER_URL
+          value: "http://shogi_bgio.onrender.com:80"
 
   - type: web
     name: shogi
     env: docker
+    runtime: docker
+    dockerContext: .
     dockerfilePath: ./docker/shogi/Dockerfile
+    plan: free
+    region: singapore
     envVars:
       - key: PORT
         value: 80
@@ -26,7 +44,11 @@ services:
   - type: web
     name: co_shogi
     env: docker
+    runtime: docker
+    dockerContext: .
     dockerfilePath: ./docker/co_shogi/Dockerfile
+    plan: free
+    region: singapore
     envVars:
       - key: PORT
         value: 80
