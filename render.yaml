@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: lobby
+    env: docker
+    dockerfilePath: ./docker/lobby/Dockerfile
+    envVars:
+      - key: PORT
+        value: 80
+
+    - type: web
+      name: server
+      env: docker
+      dockerfilePath: ./docker/server/Dockerfile
+      envVars:
+        - key: PORT
+          value: 8000
+
+  - type: web
+    name: shogi
+    env: docker
+    dockerfilePath: ./docker/shogi/Dockerfile
+    envVars:
+      - key: PORT
+        value: 80
+
+  - type: web
+    name: co_shogi
+    env: docker
+    dockerfilePath: ./docker/co_shogi/Dockerfile
+    envVars:
+      - key: PORT
+        value: 80
