@@ -14,7 +14,10 @@ COPY games ./games
 
 
 FROM base as server
-ARG ORIGIN_URL
+
+# デフォルトのORIGIN_URLを設定
+ENV ORIGIN_URL="http://localhost:3000"
+RUN echo "ORIGIN_URL is ${ORIGIN_URL}"
 
 COPY server ./server
 RUN yarn workspace @bgio-typed-storybook/server build
