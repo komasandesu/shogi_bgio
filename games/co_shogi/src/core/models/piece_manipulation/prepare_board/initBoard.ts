@@ -19,7 +19,13 @@ function setBoard( prepare_board_first:PrepareBoardType, prepare_board_second:Pr
         for (let y:number = height-prepare_height; y<height; y++) {
           const place:Position = [x-(width-prepare_width),y-(height-prepare_height)];
           const place_state = PrepareBoard.get(prepare_board_first,place);
-          startBoard[y][x] = place_state;
+          // startBoard[y][x] = place_state;
+          const board_place:Position = [x,y];
+          
+          const nextBoard = Board.putPiece(startBoard,place_state,board_place);
+          if(nextBoard != null){
+            startBoard = nextBoard;
+          }
         }
     }
 
@@ -27,7 +33,13 @@ function setBoard( prepare_board_first:PrepareBoardType, prepare_board_second:Pr
         for (let y:number = 0; y<prepare_height; y++) {
           const place:Position = [x,y];
           const place_state = PrepareBoard.get(prepare_board_second,place);
-          startBoard[prepare_height-y-1][prepare_width-x-1] = place_state;
+          // startBoard[prepare_height-y-1][prepare_width-x-1] = place_state;
+          const board_place:Position = [prepare_width-x-1,prepare_height-y-1];
+          
+          const nextBoard = Board.putPiece(startBoard,place_state,board_place);
+          if(nextBoard != null){
+            startBoard = nextBoard;
+          }
         }
     }
 

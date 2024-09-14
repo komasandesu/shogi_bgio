@@ -1,31 +1,24 @@
-#version: '2'
 services:
-  lobby:
+  app:
     build:
       context: .
-      dockerfile: docker/lobby/Dockerfile
+      dockerfile: Dockerfile
       args:
-        VITE_SERVER_URL: "http://localhost:8000"
+        # VITE_SERVER_URL: "http://localhost:8000"  # serverにリクエストを送る
+        # VITE_SERVER_URL: "http://server.atms.f5.si"  # renderに変える？
+        VITE_SERVER_URL: "https://shogi-bgio-server.onrender.com"  # renderに変える？
+    # environment:
+    #   - MY_APP_SERVER_URL=http://localhost:8000
     ports:
-      - "3000:80"
+      - "3000:80"  # lobby
+
   server:
     build:
       context: .
       dockerfile: docker/server/Dockerfile
-      args:
-        ORIGIN_URL: "localhost:3000"
+      # args:
+      #   ORIGIN_URL: "http://localhost:3000"  # appのlobbyからのリクエストを処理
+    environment:
+      - ORIGIN_URL=http://localhost:3000
     ports:
       - "8000:8000"
-  shogi:
-    build:
-      context: .
-      dockerfile: docker/shogi/Dockerfile
-    ports:
-      - "3001:80"
-  co_shogi:
-    build:
-      context: .
-      dockerfile: docker/co_shogi/Dockerfile
-    ports:
-      - "3002:80"
-    tty: true
