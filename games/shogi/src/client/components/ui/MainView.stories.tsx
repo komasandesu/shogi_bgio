@@ -16,6 +16,7 @@ export const Start: ComponentStoryObj<typeof MainView> = {
       selected_piece_position: null,
       next_move_place: null,
       movable_place: null,
+      is_needed_promotion: false,
       captured_piece_first: [['歩','0',false],['歩','0',false]],
       captured_piece_second: [['歩','1',false],['歩','1',false]],
       stage_name: 'SelectKoma',

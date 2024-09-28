@@ -127,7 +127,7 @@ const clickCell: Move<[Position]> = ({ G, playerID, events }, pos) => {
   const CanNeedPromotion = Board.detectPromotion(G.board,playerID,pos,selected_piece);
   
   const CanPromotion = CanNeedPromotion[0];
-  const NeedPromotion = CanNeedPromotion[1];
+  const is_needed_promotion = CanNeedPromotion[1];
 
   // 王を取る場合は即終了する
   const taken_piece = Board.get(G.board,pos);
@@ -154,7 +154,7 @@ const clickCell: Move<[Position]> = ({ G, playerID, events }, pos) => {
     const next_move_place = pos;
     const stage_name = 'SelectPromotion';
     events.setStage('SelectPromotion');
-    return { ...G, next_move_place, stage_name }
+    return { ...G, next_move_place, stage_name, is_needed_promotion }
   }
   else{
     // 成ることができない場合

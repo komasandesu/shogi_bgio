@@ -13,37 +13,48 @@ const second_player = '1';
 
 const clickCell: Move<[Position]> = ({ G, playerID, events }, pos) => {
   /*************************************************************************/
-  if(pos == null){
+  if(pos == null || G.selected_piece_position == null){
     // 状態をリセットする
     const movable_place = null;
     const selected_piece_position = null;
     const next_move_place = null;
+    const is_needed_promotion = false;
     const stage_name = 'SelectPiece';
     events.setStage('SelectPiece');
-    return { ...G, movable_place, selected_piece_position, next_move_place, stage_name };
+    return { ...G, movable_place, selected_piece_position, next_move_place, is_needed_promotion, stage_name };
   }
-  else if( !((pos[0]===PieceManipulation.SelectPromotion[0])&&pos[1]===PieceManipulation.SelectPromotion[1]) && !((pos[0]===PieceManipulation.UnSelectPromotion[0])&&pos[1]===PieceManipulation.UnSelectPromotion[1]) ){
+  else if( ((pos[0]===PieceManipulation.CancelSelect[0])&&pos[1]===PieceManipulation.CancelSelect[1]) || ((pos[0]===G.selected_piece_position[0])&&(pos[1]===G.selected_piece_position[1])) ){
     // 状態をリセットする
     const movable_place = null;
     const selected_piece_position = null;
     const next_move_place = null;
+    const is_needed_promotion = false;
     const stage_name = 'SelectPiece';
     events.setStage('SelectPiece');
-    return { ...G, movable_place, selected_piece_position, next_move_place, stage_name };
+    return { ...G, movable_place, selected_piece_position, next_move_place, is_needed_promotion, stage_name };
+  }
+  else if( !( ((pos[0]===PieceManipulation.SelectPromotion[0])&&(pos[1]===PieceManipulation.SelectPromotion[1])) || ((pos[0]===PieceManipulation.UnSelectPromotion[0])&&pos[1]===PieceManipulation.UnSelectPromotion[1]) ) ){
+    return INVALID_MOVE;
+  }
+  /*************************************************************************/
+  if( ((pos[0]===PieceManipulation.UnSelectPromotion[0])&&pos[1]===PieceManipulation.UnSelectPromotion[1]) && G.is_needed_promotion ){
+    return INVALID_MOVE;
   }
   /*************************************************************************/
 
   const previous_position = G.selected_piece_position;
   const next_position = G.next_move_place;
 
+  const is_needed_promotion = false;
+
   if(previous_position == null || next_position == null){
     // 状態をリセットする
-    G.movable_place = null;
-    G.selected_piece_position = null;
-    G.next_move_place = null;
+    const movable_place = null;
+    const selected_piece_position = null;
+    const next_move_place = null;
     const stage_name = 'SelectPiece';
     events.setStage('SelectPiece');
-    return { ...G, stage_name };
+    return { ...G, movable_place, selected_piece_position, next_move_place, is_needed_promotion, stage_name };
   }
 
 
@@ -57,7 +68,7 @@ const clickCell: Move<[Position]> = ({ G, playerID, events }, pos) => {
     const next_move_place = null;
     const stage_name = 'SelectPiece';
     events.setStage('SelectPiece');
-    return { ...G, movable_place, selected_piece_position, next_move_place, stage_name };
+    return { ...G, movable_place, selected_piece_position, next_move_place, is_needed_promotion, stage_name };
   }
   /*************************************************************************/
 
@@ -80,7 +91,7 @@ const clickCell: Move<[Position]> = ({ G, playerID, events }, pos) => {
   if(board == undefined || G.next_move_place==null){
     const stage_name = 'SelectPiece';
     events.setStage('SelectPiece');
-    return { ...G ,movable_place, selected_piece_position, next_move_place, stage_name }
+    return { ...G ,movable_place, selected_piece_position, next_move_place, is_needed_promotion, stage_name }
   }
   
   const taken_piece = Board.get(G.board,G.next_move_place);
@@ -88,19 +99,19 @@ const clickCell: Move<[Position]> = ({ G, playerID, events }, pos) => {
   if(taken_piece==null){
     const stage_name = 'TurnEnd';
     events.endPhase();
-    return { ...G, board, movable_place, selected_piece_position, next_move_place, stage_name };
+    return { ...G, board, movable_place, selected_piece_position, next_move_place, is_needed_promotion, stage_name };
   }
   if(playerID===first_player){
     const captured_piece_first = CapturedPiece.AddCapturedPiece(G.captured_piece_first,[taken_piece[0],first_player,false]);
     const stage_name = 'TurnEnd';
     events.endPhase();
-    return { ...G, board, movable_place, selected_piece_position, next_move_place, stage_name, captured_piece_first };
+    return { ...G, board, movable_place, selected_piece_position, next_move_place, captured_piece_first, stage_name };
   }
   if(playerID===second_player){
     const captured_piece_second = CapturedPiece.AddCapturedPiece(G.captured_piece_second,[taken_piece[0],second_player,false]);
     const stage_name = 'TurnEnd';
     events.endPhase();
-    return { ...G, board, movable_place, selected_piece_position, next_move_place, stage_name, captured_piece_second };
+    return { ...G, board, movable_place, selected_piece_position, next_move_place, is_needed_promotion, captured_piece_second, stage_name };
   }
   
 }

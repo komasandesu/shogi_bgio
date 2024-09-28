@@ -11,8 +11,8 @@ import select_move from './moves/select_move'
 import select_piece from './moves/select_piece'
 import select_promotion from './moves/select_promotion'
 
-const first_player = '0';
-const second_player = '1';
+// const first_player = '0';
+// const second_player = '1';
 
 const Shogi: Game = {
   name: 'shogi',
@@ -21,9 +21,13 @@ const Shogi: Game = {
   setup: () => ({ 
     // board: Board.empty,
     board: Board.init,
+    
     selected_piece_position: SelectedPiecePosition.empty,
     next_move_place: NextMovePlace.empty,
     movable_place: MovablePlace.empty,
+
+    is_needed_promotion: false,
+
     captured_piece_first: CapturedPiece.empty,
     captured_piece_second: CapturedPiece.empty,
     stage_name: StageName.init,

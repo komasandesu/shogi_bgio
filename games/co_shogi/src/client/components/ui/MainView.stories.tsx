@@ -37,7 +37,8 @@ export const Start: ComponentStoryObj<typeof CoShogiMainView> = {
       is_ready_first: false,
       is_ready_second: false,
       selected_setting_piece_position_first: null,
-      selected_setting_piece_position_second: null
+      selected_setting_piece_position_second: null,
+      is_needed_promotion: false
     },
     moves: {
       clickCell: action('clickCell'),

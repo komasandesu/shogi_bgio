@@ -34,7 +34,7 @@ const clickCell: Move<[Position]> = ({ G, playerID, events }, pos) => {
     events.setStage('SelectPiece');
     return { ...G, movable_place, selected_piece_position, next_move_place, stage_name };
   }
-  else if(pos[1]==PieceManipulation.captured_piece_first_pos || pos[1]==PieceManipulation.captured_piece_second_pos){
+  else if( pos[1]==PieceManipulation.captured_piece_first_pos || pos[1]==PieceManipulation.captured_piece_second_pos ){
     return INVALID_MOVE;
   }
   else if( (pos[0]===G.selected_piece_position[0])&&(pos[1]===G.selected_piece_position[1]) ){
@@ -127,7 +127,7 @@ const clickCell: Move<[Position]> = ({ G, playerID, events }, pos) => {
   const CanNeedPromotion = Board.detectPromotion(G.board,playerID,pos,selected_piece);
   
   const CanPromotion = CanNeedPromotion[0];
-  const NeedPromotion = CanNeedPromotion[1];
+  const is_needed_promotion = CanNeedPromotion[1];
 
   // 王を取る場合は即終了する
   const taken_piece = Board.get(G.board,pos);
@@ -154,7 +154,7 @@ const clickCell: Move<[Position]> = ({ G, playerID, events }, pos) => {
     const next_move_place = pos;
     const stage_name = 'SelectPromotion';
     events.setStage('SelectPromotion');
-    return { ...G, next_move_place, stage_name }
+    return { ...G, next_move_place, stage_name, is_needed_promotion }
   }
   else{
     // 成ることができない場合

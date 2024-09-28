@@ -40,6 +40,8 @@ const CoShogi: Game = {
     selected_piece_position: SelectedPiecePosition.empty,
     next_move_place: NextMovePlace.empty,
     movable_place: MovablePlace.empty,
+    is_needed_promotion: false,
+
     captured_piece_first: CapturedPiece.empty,
     captured_piece_second: CapturedPiece.empty,
     stage_name: StageName.init,

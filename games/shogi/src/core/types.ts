@@ -10,9 +10,12 @@ import type B from 'boardgame.io'
 
 export interface GameState {
   board: BoardType
+  
   selected_piece_position: SelectedPiecePositionType
   next_move_place: NextMovePlaceType
   movable_place: MovablePlaceType
+  is_needed_promotion: boolean,
+  
   captured_piece_first: CapturedPieceType
   captured_piece_second: CapturedPieceType
   stage_name: StageNameType
