@@ -22,7 +22,7 @@ export const CancelSelect: React.FC<SelectPromotionProps> = ({
             size='sm'
             variant='outlined'
             onClick={() => {
-                onClick( [-2,0] )
+                onClick( [-3,-3] )
             }}
             sx={{
                 // aspectRatio: '1 / 1',

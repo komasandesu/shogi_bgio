@@ -17,6 +17,8 @@ import type { PieceSettingBoardType } from 'core/models/piece_setting'
 
 export interface BoardProps {
   board: BoardType
+  
+  now_player:string
 
   prepare_board_second: PrepareBoardType
   piece_setting_board: PieceSettingBoardType
@@ -34,6 +36,7 @@ export interface BoardProps {
 
 export const Board2: React.FC<BoardProps> = ({   
   board, 
+  now_player,
   prepare_board_second,
   piece_setting_board,
   cost_second,
@@ -64,6 +67,7 @@ export const Board2: React.FC<BoardProps> = ({
       <>
         <GameBoard 
           board={board} 
+          now_player = {now_player} 
           onClick={onClick} 
           movable_place={movable_place} 
           nowStage={nowStage} 

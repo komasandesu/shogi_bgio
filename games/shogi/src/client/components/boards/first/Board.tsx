@@ -14,9 +14,9 @@ import type { Position } from 'core/models/position'
 
 
 const SelectPromotionPos:[number,number] = [-1,-1]
-const UnSelectPromotionPos:[number,number] = [-1,-2]
+const UnSelectPromotionPos:[number,number] = [-2,-2]
 
-const CancelSelectPos:[number,number] = [-2,0]
+const CancelSelectPos:[number,number] = [-3,-3]
 
 
 export interface BoardProps {
