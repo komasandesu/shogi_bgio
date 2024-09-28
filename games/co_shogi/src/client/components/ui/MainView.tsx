@@ -20,6 +20,7 @@ const CoShogiMainView: React.FC<MainViewProps> = ({ G, moves, ctx, matchData, pl
   if(playerID === first_player){
     return (
       <>
+        現在のプレイヤーIDは{ctx.currentPlayer}
         <SystemMessage
           currentPlayer={ctx.currentPlayer}
           matchData={matchData}
@@ -28,6 +29,8 @@ const CoShogiMainView: React.FC<MainViewProps> = ({ G, moves, ctx, matchData, pl
         />
         <Board 
           board={G.board} 
+
+          now_player = {ctx.currentPlayer}
           
           prepare_board_first={G.prepare_board_first}
           piece_setting_board={G.piece_setting_board}
@@ -44,7 +47,7 @@ const CoShogiMainView: React.FC<MainViewProps> = ({ G, moves, ctx, matchData, pl
       </>
     )
   }
-  else{
+  else if(playerID === second_player){
     return (
       <>
         <SystemMessage
@@ -54,6 +57,8 @@ const CoShogiMainView: React.FC<MainViewProps> = ({ G, moves, ctx, matchData, pl
           nowStage={G.stage_name} 
         />
         <Board2 board={G.board} 
+        
+          now_player = {ctx.currentPlayer}
 
           prepare_board_second={G.prepare_board_second}
           piece_setting_board={G.piece_setting_board}
@@ -69,6 +74,9 @@ const CoShogiMainView: React.FC<MainViewProps> = ({ G, moves, ctx, matchData, pl
         />
       </>
     )
+  }
+  else{
+    return (<></>)
   }
 }
 export default CoShogiMainView

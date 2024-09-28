@@ -23,7 +23,7 @@ export const UnSelectPromotion: React.FC<SelectPromotionProps> = ({
             size="lg"
             variant="outlined"
             onClick={() => {
-                onClick( [-1,-2] )
+                onClick( [-2,-2] )
             }}
             sx={{
                 // aspectRatio: '1 / 1',

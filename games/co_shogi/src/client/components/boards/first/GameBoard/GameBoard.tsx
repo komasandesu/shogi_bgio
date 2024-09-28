@@ -14,13 +14,14 @@ import type { Position } from 'core/models/position'
 
 
 const SelectPromotionPos:[number,number] = [-1,-1]
-const UnSelectPromotionPos:[number,number] = [-1,-2]
+const UnSelectPromotionPos:[number,number] = [-2,-2]
 
-const CancelSelectPos:[number,number] = [-2,0]
+const CancelSelectPos:[number,number] = [-3,-3]
 
 
 export interface BoardProps {
   board: BoardType
+  now_player:string
   onClick: (pos: Position, ) => void
   movable_place: MovablePlaceType
   nowStage: StageNameType
@@ -31,6 +32,7 @@ export interface BoardProps {
 
 export const GameBoard: React.FC<BoardProps> = ({ 
   board, 
+  now_player,
   onClick, 
   movable_place, 
   nowStage, 
@@ -77,9 +79,21 @@ export const GameBoard: React.FC<BoardProps> = ({
       }}/> 
     </Sheet>
 
-    <CancelSelect onClick={() => {onClick(CancelSelectPos)}} nowStage={nowStage} /> 
-    <SelectPromotion onClick={() => {onClick(SelectPromotionPos)}} nowStage={nowStage} /> 
-    <UnSelectPromotion onClick={() => {onClick(UnSelectPromotionPos)}} nowStage={nowStage} /> 
+    <CancelSelect 
+      onClick={() => {onClick(CancelSelectPos)}}
+      now_player = {now_player} 
+      nowStage={nowStage} 
+    /> 
+    <SelectPromotion 
+      onClick={() => {onClick(SelectPromotionPos)}} 
+      now_player = {now_player}
+      nowStage={nowStage} 
+    /> 
+    <UnSelectPromotion 
+      onClick={() => {onClick(UnSelectPromotionPos)}} 
+      now_player = {now_player}
+      nowStage={nowStage}
+    /> 
   </> 
   
 )

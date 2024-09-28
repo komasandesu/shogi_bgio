@@ -1,9 +1,9 @@
 export type Position = [number, number]
 
 const SelectPromotion:[number,number] = [-1,-1]
-const UnSelectPromotion:[number,number] = [-1,-2]
+const UnSelectPromotion:[number,number] = [-2,-2]
 
-const CancelSelect:[number,number] = [-2,0]
+const CancelSelect:[number,number] = [-3,-3]
 
 const captured_piece_first_pos:number = 100;
 const captured_piece_second_pos:number = 200;

@@ -6,24 +6,27 @@ import type { StageNameType } from 'core/models/piece_operation_models/Stage_nam
 import type { Position } from 'core/models/position'
 
 
+const first_player = '0';
 
 export interface SelectPromotionProps {
     nowStage: StageNameType
+    now_player:string
     onClick: ( pos: Position, ) => void
 }
 
 export const UnSelectPromotion: React.FC<SelectPromotionProps> = ({
     nowStage,
+    now_player,
     onClick
 }) => {
-    if( nowStage==='SelectPromotion' ){
+    if( nowStage === 'SelectPromotion' && now_player === first_player ){
     return (
         <Button
             data-testid={`cell-unpromotion`}
             size="lg"
             variant="outlined"
             onClick={() => {
-                onClick( [-1,-2] )
+                onClick( [-2,-2] )
             }}
             sx={{
                 // aspectRatio: '1 / 1',

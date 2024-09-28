@@ -5,24 +5,27 @@ import type { CellType } from 'core/models/cell'
 import type { StageNameType } from 'core/models/piece_operation_models/Stage_name'
 import type { Position } from 'core/models/position'
 
+const first_player = '0';
 
 export interface SelectPromotionProps {
     nowStage: StageNameType
+    now_player:string
     onClick: ( pos: Position, ) => void
 }
 
 export const CancelSelect: React.FC<SelectPromotionProps> = ({
     nowStage,
+    now_player,
     onClick
 }) => {
-    if( nowStage==='SelectMove' || nowStage==='SelectPromotion' ){
+    if( (nowStage==='SelectMove' || nowStage==='SelectPromotion') && now_player === first_player ){
     return (
         <Button
             data-testid={`cell-cancel`}
             size='sm'
             variant='outlined'
             onClick={() => {
-                onClick( [-2,0] )
+                onClick( [-3,-3] )
             }}
             sx={{
                 // aspectRatio: '1 / 1',

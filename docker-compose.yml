@@ -4,9 +4,9 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        # VITE_SERVER_URL: "http://localhost:8000"  # serverにリクエストを送る
+        VITE_SERVER_URL: "http://localhost:8000"  # serverにリクエストを送る
         # VITE_SERVER_URL: "http://server.atms.f5.si"  # renderに変える？
-        VITE_SERVER_URL: "https://shogi-bgio-server.onrender.com"  # renderに変える？
+        # VITE_SERVER_URL: "https://shogi-bgio-server.onrender.com"  # renderに変える？
     # environment:
     #   - MY_APP_SERVER_URL=http://localhost:8000
     ports:
