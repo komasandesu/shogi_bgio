@@ -11,7 +11,7 @@ const second_player:string = '1';
 
 function detectPromotion( board:BoardType, playerID:string, position:Position, piece:CellType ): CanNeedPromotionType{
   const can_need_promotion : CanNeedPromotionType = [ false,false ];
-  const x:number = position[0];
+  // const x:number = position[0];
   const y:number = position[1];
 
   const selected_piece = piece![0];
