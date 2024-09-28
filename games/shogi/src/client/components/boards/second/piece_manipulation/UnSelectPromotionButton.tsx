@@ -5,18 +5,20 @@ import type { CellType } from 'core/models/cell'
 import type { StageNameType } from 'core/models/piece_operation_models/Stage_name'
 import type { Position } from 'core/models/position'
 
-
+const second_player = '1';
 
 export interface SelectPromotionProps {
     nowStage: StageNameType
+    now_player:string
     onClick: ( pos: Position, ) => void
 }
 
 export const UnSelectPromotion: React.FC<SelectPromotionProps> = ({
     nowStage,
+    now_player,
     onClick
 }) => {
-    if( nowStage==='SelectPromotion' ){
+    if( nowStage==='SelectPromotion' && now_player === second_player ){
     return (
         <Button
             data-testid={`cell-unpromotion`}

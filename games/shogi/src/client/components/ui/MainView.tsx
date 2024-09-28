@@ -27,6 +27,9 @@ const MainView: React.FC<MainViewProps> = ({ G, moves, ctx, matchData, playerID 
         />
         <Board 
           board={G.board} 
+        
+          now_player = {ctx.currentPlayer}
+
           onClick={moves.clickCell} 
           movable_place={G.movable_place} 
           nowStage={G.stage_name} 
@@ -45,7 +48,11 @@ const MainView: React.FC<MainViewProps> = ({ G, moves, ctx, matchData, playerID 
           matchData={matchData}
           result={ctx.gameover}
         />
-        <Board2 board={G.board} 
+        <Board2 
+          board={G.board} 
+        
+          now_player = {ctx.currentPlayer}
+
           onClick={moves.clickCell} 
           movable_place={G.movable_place} 
           nowStage={G.stage_name} 

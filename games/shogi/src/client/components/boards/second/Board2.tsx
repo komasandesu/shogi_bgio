@@ -23,6 +23,7 @@ const CancelSelectPos:[number,number] = [-3,-3]
 
 export interface BoardProps {
   board: BoardType
+  now_player:string
   onClick: (pos: Position, ) => void
   movable_place: MovablePlaceType
   nowStage: StageNameType
@@ -33,6 +34,7 @@ export interface BoardProps {
 
 export const Board2: React.FC<BoardProps> = ({   
   board, 
+  now_player,
   onClick, 
   movable_place, 
   nowStage, 
@@ -79,8 +81,20 @@ export const Board2: React.FC<BoardProps> = ({
       }}/> 
     </Sheet>
 
-    <CancelSelect onClick={() => {onClick(CancelSelectPos)}} nowStage={nowStage} /> 
-    <SelectPromotion onClick={() => {onClick(SelectPromotionPos)}} nowStage={nowStage} /> 
-    <UnSelectPromotion onClick={() => {onClick(UnSelectPromotionPos)}} nowStage={nowStage} /> 
+    <CancelSelect 
+      onClick={() => {onClick(CancelSelectPos)}} 
+      now_player = {now_player} 
+      nowStage={nowStage} 
+    /> 
+    <SelectPromotion 
+      onClick={() => {onClick(SelectPromotionPos)}} 
+      now_player = {now_player} 
+      nowStage={nowStage} 
+    /> 
+    <UnSelectPromotion 
+      onClick={() => {onClick(UnSelectPromotionPos)}} 
+      now_player = {now_player} 
+      nowStage={nowStage} 
+    /> 
   </> 
 )
