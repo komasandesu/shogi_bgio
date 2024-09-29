@@ -5,9 +5,9 @@ Shogi that runs in the browser is implemented in [boardgame.io](https://boardgam
 ## Directory Structure
 
 ```
-├── copilot       # AWS Copilot CLI Deploy Configurations
 ├── games
-│   └── ticTacToe # TicTacToe Game Implementation
+│   └── shogi # Shogi Game Implementation
+│   └── co_shogi # Cost mechanics Shogi Game Implementation
 ├── lobby         # Lobby Implementation
 └── server        # Server Implementation
 ```
