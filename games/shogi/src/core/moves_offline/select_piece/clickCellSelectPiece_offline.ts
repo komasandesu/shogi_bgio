@@ -25,6 +25,11 @@ const clickCellOffline: Move<[Position]> = ({ G, playerID, events }, pos) => {
       const movable_place = Board.get_empty_place(G.board,playerID,captured_piece);
       const selected_piece_position = pos;
       const stage_name = 'SelectMove';
+
+      if(movable_place == null){
+        return INVALID_MOVE;
+      }
+      
       events.setStage('SelectMove');
       return { ...G, selected_piece_position, movable_place, stage_name }
     }
@@ -38,6 +43,11 @@ const clickCellOffline: Move<[Position]> = ({ G, playerID, events }, pos) => {
       const movable_place = Board.get_empty_place(G.board,playerID,captured_piece);
       const selected_piece_position = pos;
       const stage_name = 'SelectMove';
+
+      if(movable_place == null){
+        return INVALID_MOVE;
+      }
+
       events.setStage('SelectMove');
       return { ...G, selected_piece_position, movable_place, stage_name }
     }
