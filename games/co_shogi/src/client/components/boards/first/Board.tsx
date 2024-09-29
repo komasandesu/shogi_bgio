@@ -9,6 +9,7 @@ import type { MovablePlaceType } from 'core/models/piece_operation_models/Movabl
 import type { SelectedPiecePositionType } from 'core/models/piece_operation_models/SelectedPiecePosition'
 import type { StageNameType } from 'core/models/piece_operation_models/Stage_name'
 import type { Position } from 'core/models/position'
+import type { NextMovePlaceType } from 'core/models/piece_operation_models/NextMovePlace'
 
 import type { PrepareBoardType } from 'core/models/prepare_board'
 import { PrepareBoard } from './PrepareBoard/PrepareBoard'
@@ -28,25 +29,31 @@ export interface BoardProps {
   onClick: (pos: Position, ) => void
 
   movable_place: MovablePlaceType
-  nowStage: StageNameType
   CapturedPieceOfFirst: CapturedPieceType
   CapturedPieceOfSecond: CapturedPieceType
   selected_piece_position: SelectedPiecePositionType
+  
+  next_move_place: NextMovePlaceType
+
+  nowStage: StageNameType
 }
 
 export const Board: React.FC<BoardProps> = ({ 
   board, 
   now_player,
+  onClick, 
+
   prepare_board_first,
   piece_setting_board,
   cost_first,
   selected_setting_piece_position,
-  onClick, 
   movable_place, 
-  nowStage, 
   CapturedPieceOfFirst, 
   CapturedPieceOfSecond, 
-  selected_piece_position 
+  selected_piece_position,
+  next_move_place,
+  
+  nowStage, 
 }) => {
   if( nowStage==='Start' || nowStage==='SetPiece' ){
     return (
@@ -67,13 +74,19 @@ export const Board: React.FC<BoardProps> = ({
       <>
         <GameBoard 
           board={board} 
+
           now_player = {now_player}
+
           onClick={onClick} 
-          movable_place={movable_place} 
-          nowStage={nowStage} 
+          movable_place={movable_place}
           CapturedPieceOfFirst={CapturedPieceOfFirst} 
           CapturedPieceOfSecond={CapturedPieceOfSecond} 
           selected_piece_position={selected_piece_position} 
+          
+
+          next_move_place={next_move_place}
+          
+          nowStage={nowStage} 
         /> 
       </> 
     )
