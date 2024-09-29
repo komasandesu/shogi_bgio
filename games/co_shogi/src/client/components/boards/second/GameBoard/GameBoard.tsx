@@ -24,6 +24,8 @@ const UnSelectPromotionPos:[number,number] = [-2,-2]
 
 const CancelSelectPos:[number,number] = [-3,-3]
 
+const first_player = '0';
+const second_player = '1';
 
 
 export interface BoardProps {
@@ -62,11 +64,15 @@ export const GameBoard: React.FC<BoardProps> = ({
         right: '-240px',
       }}
     >
-      <CapturedLine line={CapturedPieceOfFirst}
-          lineNumber={100}
-          onClick={(x) => {
-            onClick([x, 100])
-      }}/> 
+      <CapturedLine 
+        line={CapturedPieceOfFirst}
+        player = {first_player} 
+        selected_piece_position = {selected_piece_position}
+        lineNumber={100}
+        onClick={(x) => {
+          onClick([x, 100])
+        }}
+      /> 
       <p></p>
       {board.map((_, y, line) => (
         <Line
@@ -83,11 +89,15 @@ export const GameBoard: React.FC<BoardProps> = ({
         />
       ))}
       <p></p>
-      <CapturedLine line={CapturedPieceOfSecond}
-          lineNumber={200}
-          onClick={(x) => {
-            onClick([x, 200])
-      }}/> 
+      <CapturedLine 
+        line={CapturedPieceOfSecond}
+        player = {second_player} 
+        selected_piece_position = {selected_piece_position}
+        lineNumber={200}
+        onClick={(x) => {
+          onClick([x, 200])
+        }}
+      /> 
     </Sheet>
 
     <CancelSelect 
