@@ -3,7 +3,7 @@ import Board, { height,width }  from '../board'
 import type { BoardType } from '../board'
 import type { CellType } from '../cell'
 import type { CanNeedPromotionType } from '../piece_operation_models/CanNeedPromotion'
-import type { MovablePlaceType } from '../piece_operation_models/MovablePlace'
+// import type { MovablePlaceType } from '../piece_operation_models/MovablePlace'
 import type { Position } from '../position'
 
 const first_player:string = '0';

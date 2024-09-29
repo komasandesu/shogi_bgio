@@ -4,6 +4,7 @@ import PieceManipulation from '../../models/position';
 import type { Position } from '../../models/position'
 import type { Move } from '../../types'
 
+import CapturedPiece from '../../models/piece_operation_models/CapturedPiece'
 
 
 // 先手と後手で盤面を逆にする
@@ -15,24 +16,26 @@ const clickCell: Move<[Position]> = ({ G, playerID, events }, pos) => {
   // console.log(pos);
 
   // 持ち駒を選ぶ場合
-  if(pos[1]===PieceManipulation.captured_piece_first_pos){
+  if(pos[1]===PieceManipulation.captured_piece_first_pos){ //先手
     if(playerID!==first_player){
       return INVALID_MOVE;
     }
     else{
-      const movable_place = Board.get_empty_place(G.board);
+      const captured_piece = CapturedPiece.GetCapturedPiece(G.captured_piece_first,pos[0])
+      const movable_place = Board.get_empty_place(G.board,playerID,captured_piece);
       const selected_piece_position = pos;
       const stage_name = 'SelectMove';
       events.setStage('SelectMove');
       return { ...G, selected_piece_position, movable_place, stage_name }
     }
   }
-  if(pos[1]===PieceManipulation.captured_piece_second_pos){
+  if(pos[1]===PieceManipulation.captured_piece_second_pos){ //後手
     if(playerID!==second_player){
       return INVALID_MOVE;
     }
     else{
-      const movable_place = Board.get_empty_place(G.board);
+      const captured_piece = CapturedPiece.GetCapturedPiece(G.captured_piece_second,pos[0])
+      const movable_place = Board.get_empty_place(G.board,playerID,captured_piece);
       const selected_piece_position = pos;
       const stage_name = 'SelectMove';
       events.setStage('SelectMove');

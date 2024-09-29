@@ -56,18 +56,19 @@ const get_movable_place = (
 
 // 動かすことができる場所を探索
 const get_empty_place = (
-  board: BoardType
+  board: BoardType,
+  now_player: PlayerID,
+  piece: CellType,
 ): MovablePlaceType => {
-  return EmptyPlace(board);
+  return EmptyPlace(now_player, board, piece);
 }
-
 
 // 成ることができるか、成る必要があるか
 const detectPromotion = (
   board: BoardType,
   now_player: PlayerID,
   pos: Position,
-  piece: [string,PlayerID,boolean],
+  piece: CellType,
 ): CanNeedPromotionType => {
   return CanNeedPromotion(board, now_player, pos, piece );
 }

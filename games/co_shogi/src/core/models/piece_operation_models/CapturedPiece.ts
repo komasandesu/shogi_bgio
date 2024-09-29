@@ -6,6 +6,11 @@ const empty = Array(0);
 const init_first:CellType[] = [['飛','0',false],['角','0',false],['飛','0',false],['飛','0',false],['角','0',false],['飛','0',false],['飛','0',false],['角','0',false],['飛','0',false],['飛','0',false],['角','0',false],['飛','0',false]];
 const init_second:CellType[] = [['歩','1',false],['銀','1',false]];
 
+const GetCapturedPiece = (captured_pieces: CapturedPieceType, pos:number): CellType => {
+    const next_captured_pieces:CellType = captured_pieces[pos];
+    return next_captured_pieces;
+}
+
 const AddCapturedPiece = (captured_pieces: CapturedPieceType, piece:CellType): CapturedPieceType => {
     const next_captured_pieces:CapturedPieceType = captured_pieces.concat([piece]);
     return next_captured_pieces;
@@ -21,6 +26,7 @@ const CapturedPiece = {
     empty,
     init_first,
     init_second,
+    GetCapturedPiece,
     AddCapturedPiece,
     RemoveCapturedPiece,
 }

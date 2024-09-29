@@ -8,7 +8,7 @@ const second_player:string = '1';
 
 
 function nifu( board:BoardType ): boolean{
-  var cost:number = 0;
+  // var cost:number = 0;
 
   for (let x:number = 0; x<width; x++) {
     let count_pawn_first:number = 0;
