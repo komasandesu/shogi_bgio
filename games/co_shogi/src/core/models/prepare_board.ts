@@ -2,13 +2,10 @@ import Util from '../util'
 import type { CellType } from './cell'
 import type { LineType } from './line'
 import Line from './line'
-import type { CanNeedPromotionType } from './piece_operation_models/CanNeedPromotion'
 import type { MovablePlaceType } from './piece_operation_models/MovablePlace'
-import { CanNeedPromotion } from './piece_manipulation/detectPromotion'
 import type { Position } from './position'
-import { EmptyPlace } from './piece_manipulation/findEmptyPlace'
+import { EmptyPlace } from './piece_manipulation/prepare_board/findEmptyPlace'
 import type { GameResult } from '../types'
-import { MovablePlace } from './piece_manipulation/findMovablePlace'
 import type { PlayerID } from 'boardgame.io'
 
 
@@ -43,31 +40,10 @@ const set = (board: PrepareBoardType, [x, y]: Position, v: CellType): PrepareBoa
 
 
 // 動かすことができる場所を探索
-const get_movable_place = (
-  board: PrepareBoardType,
-  now_player: PlayerID,
-  pos: Position
-): MovablePlaceType => {
-  return MovablePlace(board, now_player, pos );
-}
-
-
-// 動かすことができる場所を探索
 const get_empty_place = (
   board: PrepareBoardType
 ): MovablePlaceType => {
   return EmptyPlace(board);
-}
-
-
-// 成ることができるか、成る必要があるか
-const detectPromotion = (
-  board: PrepareBoardType,
-  now_player: PlayerID,
-  pos: Position,
-  piece: [string,PlayerID,boolean],
-): CanNeedPromotionType => {
-  return CanNeedPromotion(board, now_player, pos, piece );
 }
 
 
@@ -121,38 +97,6 @@ const lines = (board: PrepareBoardType): LineType[] => {
   return [...horizontalLines, ...vertialLines, ...diagonalLines]
 }
 
-const isVictory = (board: PrepareBoardType): boolean => {
-  let Kings:number = 0;
-
-  for (let y:number = 0; y < prepare_height ; y++) {
-    for (let x:number = 0; x < prepare_width ; x++) {
-      if (get(board, [x,y]) !== null){
-        if (get(board, [x,y])![0]=='王'){
-          Kings += 1;
-        }
-      }
-    }
-  }
-
-  if(Kings===1){
-    return true;
-  }
-  else{
-    return false;
-  }
-}
-const isDraw = (board: PrepareBoardType): boolean => {
-  return board.every(Line.isFull)
-}
-
-const result = (board: PrepareBoardType, currentPlayer: PlayerID): GameResult => {
-  if (isVictory(board)) {
-    return { winner: currentPlayer }
-  }
-  if (isDraw(board)) {
-    return { draw: true }
-  }
-}
 
 const PrepareBoard = {
   prepare_height,
@@ -161,15 +105,10 @@ const PrepareBoard = {
   init_first,
   init_second,
   get,
-  get_movable_place,
   get_empty_place,
-  detectPromotion,
   selectPiece,
   movePiece,
   putPiece,
   lines,
-  result,
-  isVictory,
-  isDraw,
 }
 export default PrepareBoard

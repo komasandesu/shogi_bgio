@@ -8,7 +8,7 @@ const second_player:string = '1';
 
 
 function nifu( board:BoardType ): boolean{
-  var cost:number = 0;
+  // var cost:number = 0;
 
   for (let x:number = 0; x<width; x++) {
     let count_pawn_first:number = 0;
@@ -19,7 +19,7 @@ function nifu( board:BoardType ): boolean{
       if ( place_state !== null ){
         if ( place_state[0] === '歩' && (!place_state[2]) ){
           if(place_state[1]===first_player)count_pawn_first += 1;
-          if(place_state[1]===first_player)count_pawn_second += 1;
+          if(place_state[1]===second_player)count_pawn_second += 1;
         }
       }
     }
