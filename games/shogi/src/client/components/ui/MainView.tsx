@@ -32,10 +32,13 @@ const MainView: React.FC<MainViewProps> = ({ G, moves, ctx, matchData, playerID 
 
           onClick={moves.clickCell} 
           movable_place={G.movable_place} 
-          nowStage={G.stage_name} 
           CapturedPieceOfFirst={G.captured_piece_first} 
           CapturedPieceOfSecond={G.captured_piece_second} 
           selected_piece_position={G.selected_piece_position} 
+
+          next_move_place={G.next_move_place}
+          
+          nowStage={G.stage_name} 
         />  
       </>
     )
@@ -55,10 +58,13 @@ const MainView: React.FC<MainViewProps> = ({ G, moves, ctx, matchData, playerID 
 
           onClick={moves.clickCell} 
           movable_place={G.movable_place} 
-          nowStage={G.stage_name} 
           CapturedPieceOfFirst={G.captured_piece_first} 
           CapturedPieceOfSecond={G.captured_piece_second} 
           selected_piece_position={G.selected_piece_position} 
+
+          next_move_place={G.next_move_place}
+          
+          nowStage={G.stage_name} 
         />
       </>
     )

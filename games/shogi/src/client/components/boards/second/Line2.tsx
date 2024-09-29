@@ -1,9 +1,12 @@
 import React from 'react'
 import { Sheet } from '@mui/joy'
 import { Cell2 } from './Cell2'
+
 import type { LineType } from 'core/models/line'
 import type { MovablePlaceType } from 'core/models/piece_operation_models/MovablePlace'
 import type { SelectedPiecePositionType } from 'core/models/piece_operation_models/SelectedPiecePosition'
+import type { NextMovePlaceType } from 'core/models/piece_operation_models/NextMovePlace'
+import type { StageNameType } from 'core/models/piece_operation_models/Stage_name'
 
 export interface LineProps {
   line: LineType
@@ -11,6 +14,8 @@ export interface LineProps {
   lineNumber: number
   movable_place: MovablePlaceType
   selected_piece_position: SelectedPiecePositionType
+  next_move_place: NextMovePlaceType
+  nowStage: StageNameType
 }
 
 export const Line2: React.FC<LineProps> = ({ 
@@ -18,7 +23,9 @@ export const Line2: React.FC<LineProps> = ({
   onClick, 
   lineNumber,
   movable_place,
-  selected_piece_position 
+  selected_piece_position,
+  next_move_place,
+  nowStage, 
 }) => (
   <Sheet
     sx={{
@@ -39,6 +46,8 @@ export const Line2: React.FC<LineProps> = ({
         }}
         movable_place={movable_place}
         selected_piece_position={selected_piece_position}
+        next_move_place={next_move_place}
+        nowStage={nowStage} 
       />
     ))}
   </Sheet>

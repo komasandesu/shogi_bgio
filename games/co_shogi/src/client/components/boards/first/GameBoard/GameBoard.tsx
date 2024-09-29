@@ -1,16 +1,22 @@
 import React from 'react'
 import { Sheet } from '@mui/joy'
-import type { BoardType } from 'core/models/board'
+
 import { CapturedLine } from './CapturedPiece/CapturedLine'
-import type { CapturedPieceType } from 'core/models/piece_operation_models/CapturedPiece'
 import { Line } from './Line'
+
+import type { Position } from 'core/models/position'
+
+import type { CapturedPieceType } from 'core/models/piece_operation_models/CapturedPiece'
 import type { MovablePlaceType } from 'core/models/piece_operation_models/MovablePlace'
-import { CancelSelect } from './piece_manipulation/CancelSelectButton'
+import type { BoardType } from 'core/models/board'
 import type { SelectedPiecePositionType } from 'core/models/piece_operation_models/SelectedPiecePosition'
+import type { NextMovePlaceType } from 'core/models/piece_operation_models/NextMovePlace'
 import type { StageNameType } from 'core/models/piece_operation_models/Stage_name'
+
+import { CancelSelect } from './piece_manipulation/CancelSelectButton'
 import { SelectPromotion } from './piece_manipulation/SelectPromotionButton'
 import { UnSelectPromotion } from './piece_manipulation/UnSelectPromotionButton'
-import type { Position } from 'core/models/position'
+
 
 
 const SelectPromotionPos:[number,number] = [-1,-1]
@@ -24,10 +30,11 @@ export interface BoardProps {
   now_player:string
   onClick: (pos: Position, ) => void
   movable_place: MovablePlaceType
-  nowStage: StageNameType
   CapturedPieceOfFirst: CapturedPieceType
   CapturedPieceOfSecond: CapturedPieceType
   selected_piece_position: SelectedPiecePositionType
+  next_move_place: NextMovePlaceType
+  nowStage: StageNameType
 }
 
 export const GameBoard: React.FC<BoardProps> = ({ 
@@ -35,10 +42,11 @@ export const GameBoard: React.FC<BoardProps> = ({
   now_player,
   onClick, 
   movable_place, 
-  nowStage, 
   CapturedPieceOfFirst, 
   CapturedPieceOfSecond, 
-  selected_piece_position 
+  selected_piece_position,
+  next_move_place,
+  nowStage, 
 }) => (
   <>
     <Sheet
@@ -69,6 +77,8 @@ export const GameBoard: React.FC<BoardProps> = ({
           }}
           movable_place={movable_place}
           selected_piece_position={selected_piece_position}
+          next_move_place={next_move_place}
+          nowStage={nowStage} 
         />
       ))}
       <p></p>
@@ -80,19 +90,19 @@ export const GameBoard: React.FC<BoardProps> = ({
     </Sheet>
 
     <CancelSelect 
-      onClick={() => {onClick(CancelSelectPos)}}
+      onClick={() => {onClick(CancelSelectPos)}} 
       now_player = {now_player} 
       nowStage={nowStage} 
     /> 
     <SelectPromotion 
       onClick={() => {onClick(SelectPromotionPos)}} 
-      now_player = {now_player}
+      now_player = {now_player} 
       nowStage={nowStage} 
     /> 
     <UnSelectPromotion 
       onClick={() => {onClick(UnSelectPromotionPos)}} 
-      now_player = {now_player}
-      nowStage={nowStage}
+      now_player = {now_player} 
+      nowStage={nowStage} 
     /> 
   </> 
   

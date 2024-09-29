@@ -20,7 +20,6 @@ const CoShogiMainView: React.FC<MainViewProps> = ({ G, moves, ctx, matchData, pl
   if(playerID === first_player){
     return (
       <>
-        現在のプレイヤーIDは{ctx.currentPlayer}
         <SystemMessage
           currentPlayer={ctx.currentPlayer}
           matchData={matchData}
@@ -29,6 +28,8 @@ const CoShogiMainView: React.FC<MainViewProps> = ({ G, moves, ctx, matchData, pl
         />
         <Board 
           board={G.board} 
+          
+          onClick={moves.clickCell} 
 
           now_player = {ctx.currentPlayer}
           
@@ -37,12 +38,13 @@ const CoShogiMainView: React.FC<MainViewProps> = ({ G, moves, ctx, matchData, pl
           selected_setting_piece_position={G.selected_setting_piece_position_first}
           cost_first={G.cost_first}
 
-          onClick={moves.clickCell} 
           movable_place={G.movable_place} 
-          nowStage={G.stage_name} 
           CapturedPieceOfFirst={G.captured_piece_first} 
           CapturedPieceOfSecond={G.captured_piece_second} 
           selected_piece_position={G.selected_piece_position} 
+          next_move_place={G.next_move_place}
+          
+          nowStage={G.stage_name} 
         />  
       </>
     )
@@ -56,7 +58,10 @@ const CoShogiMainView: React.FC<MainViewProps> = ({ G, moves, ctx, matchData, pl
           result={ctx.gameover}
           nowStage={G.stage_name} 
         />
-        <Board2 board={G.board} 
+        <Board2 
+          board={G.board} 
+          
+          onClick={moves.clickCell} 
         
           now_player = {ctx.currentPlayer}
 
@@ -65,12 +70,14 @@ const CoShogiMainView: React.FC<MainViewProps> = ({ G, moves, ctx, matchData, pl
           selected_setting_piece_position={G.selected_setting_piece_position_second}
           cost_second={G.cost_second}
 
-          onClick={moves.clickCell} 
           movable_place={G.movable_place} 
-          nowStage={G.stage_name} 
           CapturedPieceOfFirst={G.captured_piece_first} 
           CapturedPieceOfSecond={G.captured_piece_second} 
           selected_piece_position={G.selected_piece_position} 
+          
+          next_move_place={G.next_move_place}
+          
+          nowStage={G.stage_name} 
         />
       </>
     )
