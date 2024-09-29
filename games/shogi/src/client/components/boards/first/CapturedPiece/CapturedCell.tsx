@@ -1,42 +1,74 @@
 import React from 'react'
-import { Button } from '@mui/joy'
-import { Piece } from '../../../pieces/Piece'
 import type { CellType } from 'core/models/cell'
 import type { Position } from 'core/models/position'
+import type { SelectedPiecePositionType } from 'core/models/piece_operation_models/SelectedPiecePosition'
 
+import { SelectedCapturedCell } from './CapturedCell/SelectedCapturedCell'
+import { UnSelectedCapturedCell } from './CapturedCell/UnSelectedCapturedCell'
 
+import type { PlayerID } from 'boardgame.io'
+
+const first_player = '0';
+const second_player = '1';
+
+const captured_piece_first_pos:number = 100;
+const captured_piece_second_pos:number = 200;
+
+const is_selected = (pos:number, player:PlayerID, selected_piece_position:SelectedPiecePositionType) : boolean => {
+  if(selected_piece_position !== null){
+    if(player === first_player){
+      if(selected_piece_position[1] === captured_piece_first_pos){
+        if( pos === selected_piece_position[0] ){
+          return true;
+        }
+      }
+    }
+    else if(player === second_player){
+      if(selected_piece_position[1] === captured_piece_second_pos){
+        if( pos === selected_piece_position[0] ){
+          return true;
+        }
+      }
+    }
+  }
+  return false;
+}
 
 export interface CellProps {
   cell: CellType
   position: Position
   onClick: () => void
+  player:PlayerID
+  selected_piece_position: SelectedPiecePositionType
 }
 
 export const CapturedCell: React.FC<CellProps> = ({
   cell,
-  position: [x, y],
+  position: [pos, player_id],
   onClick,
+  player,
+  selected_piece_position,
 }) => {
-  return (
-    <Button
-        size="lg"
-        variant="outlined"
+  if(is_selected(pos,player,selected_piece_position)){
+    return (
+      <SelectedCapturedCell
+        cell={cell}
+        position={[pos, player_id]}
         onClick={() => {
-            onClick()
+          onClick()
         }}
-        data-testid={`cell-${x}-${y}`}
-        sx={{
-          aspectRatio: '1 / 1',
-          width: '100%',
-          minWidth: '80px',
-          maxWidth: '80px',
-          borderRadius: '0',
-          flex: '1',
-          bgcolor: '#',
-          float: 'left',
+      />
+    )
+  }
+  else{
+    return (
+      <UnSelectedCapturedCell
+        cell={cell}
+        position={[pos, player_id]}
+        onClick={() => {
+          onClick()
         }}
-    >
-        {cell === null ? '' : <Piece koma={cell[0]} player={cell[1]} isPromoted={cell[2]} {...cell} isOnBoard={false} />}
-    </Button>
-)
+      />
+    )
+  }
 }

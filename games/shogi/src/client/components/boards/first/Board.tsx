@@ -17,6 +17,7 @@ import { CancelSelect } from './piece_manipulation/CancelSelectButton'
 import { SelectPromotion } from './piece_manipulation/SelectPromotionButton'
 import { UnSelectPromotion } from './piece_manipulation/UnSelectPromotionButton'
 
+import type { PlayerID } from 'boardgame.io'
 
 
 const SelectPromotionPos:[number,number] = [-1,-1]
@@ -25,9 +26,12 @@ const UnSelectPromotionPos:[number,number] = [-2,-2]
 const CancelSelectPos:[number,number] = [-3,-3]
 
 
+const first_player = '0';
+const second_player = '1';
+
 export interface BoardProps {
   board: BoardType
-  now_player:string
+  now_player:PlayerID
   onClick: (pos: Position, ) => void
   movable_place: MovablePlaceType
   CapturedPieceOfFirst: CapturedPieceType
@@ -61,11 +65,15 @@ export const Board: React.FC<BoardProps> = ({
         right: '-240px',
       }}
     >
-      <CapturedLine line={CapturedPieceOfSecond}
-          lineNumber={200}
-          onClick={(x) => {
-            onClick([x, 200])
-      }}/> 
+      <CapturedLine 
+        line={CapturedPieceOfSecond}
+        player = {second_player} 
+        selected_piece_position = {selected_piece_position}
+        lineNumber={200}
+        onClick={(x) => {
+          onClick([x, 200])
+        }}
+      /> 
       <p></p>
       {board.map((line, y) => (
         <Line
@@ -82,11 +90,15 @@ export const Board: React.FC<BoardProps> = ({
         />
       ))}
       <p></p>
-      <CapturedLine line={CapturedPieceOfFirst}
-          lineNumber={100}
-          onClick={(x) => {
-            onClick([x, 100])
-      }}/> 
+      <CapturedLine 
+        line={CapturedPieceOfFirst}
+        player = {first_player} 
+        selected_piece_position = {selected_piece_position}
+        lineNumber={100}
+        onClick={(x) => {
+          onClick([x, 100])
+        }}
+      /> 
     </Sheet>
 
     <CancelSelect 

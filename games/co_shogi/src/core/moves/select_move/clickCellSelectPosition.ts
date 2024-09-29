@@ -34,9 +34,6 @@ const clickCell: Move<[Position]> = ({ G, playerID, events }, pos) => {
     events.setStage('SelectPiece');
     return { ...G, movable_place, selected_piece_position, next_move_place, stage_name };
   }
-  else if( pos[1]==PieceManipulation.captured_piece_first_pos || pos[1]==PieceManipulation.captured_piece_second_pos ){
-    return INVALID_MOVE;
-  }
   else if( (pos[0]===G.selected_piece_position[0])&&(pos[1]===G.selected_piece_position[1]) ){
     // 状態をリセットする
     const movable_place = null;
@@ -45,6 +42,9 @@ const clickCell: Move<[Position]> = ({ G, playerID, events }, pos) => {
     const stage_name = 'SelectPiece';
     events.setStage('SelectPiece');
     return { ...G, movable_place, selected_piece_position, next_move_place, stage_name };
+  }
+  else if( pos[1]===PieceManipulation.captured_piece_first_pos || pos[1]===PieceManipulation.captured_piece_second_pos ){
+    return INVALID_MOVE;
   }
   /*************************************************************************/
 
@@ -91,7 +91,6 @@ const clickCell: Move<[Position]> = ({ G, playerID, events }, pos) => {
     return { ...G, board, movable_place, selected_piece_position, next_move_place, stage_name, captured_piece_first };
   }
   if(previous_position[1]===PieceManipulation.captured_piece_second_pos){// 持ち駒を使う場合
-    console.log("bbbb");
     const selected_piece = G.captured_piece_second[previous_position[0]];
     const board = Board.movePiece(G.board, selected_piece, previous_position, next_position);
     // 状態をリセットする
