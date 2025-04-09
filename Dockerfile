@@ -20,9 +20,9 @@ COPY lobby ./lobby
 
 # VITE_SERVER_URLをビルド時に注入
 ARG VITE_SERVER_URL
-# ENV VITE_SERVER_URL=${VITE_SERVER_URL}
+ENV VITE_SERVER_URL=${VITE_SERVER_URL}
 
-# RUN echo "VITE_SERVER_URL is ${VITE_SERVER_URL}"
+RUN echo "VITE_SERVER_URL is ${VITE_SERVER_URL}"
 
 RUN yarn workspace @bgio-typed-storybook/lobby build
 
